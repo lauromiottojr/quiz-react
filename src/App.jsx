@@ -8,11 +8,11 @@ import './App.css'
 
 function App() {
 
-  const [quizState, dispach] = useContext(QuizContext)
+  const [quizState, dispatch] = useContext(QuizContext)
 
   useEffect(() => {
     //embaralhar as perguntas
-    dispach({ type: "REORDER_QUESTIONS" });
+    dispatch({ type: "REORDER_QUESTIONS" });
   }, [])
 
   return (
