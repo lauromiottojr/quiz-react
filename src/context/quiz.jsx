@@ -36,12 +36,26 @@ const quizReducer = (state, action) => {
             return {
                 ...state,
                 currentQuestion: nextQuestion,
-                gameStage: endGame ? STAGES[2] : state.gameStage
+                gameStage: endGame ? STAGES[2] : state.gameStage,
+                answerSelected: false
             }
         case "NEW_GAME":
             return initialState;
         case "CHECK_ANSWER":
-            console.log(action)
+            if (state.answerSelected) {
+                return state;
+            }
+            const answer = action.payload.answer
+            const option = action.payload.option
+            let correctAnswer = 0
+            if (answer === option) {
+                correctAnswer = 1;
+            }
+            return {
+                ...state,
+                score: state.score + correctAnswer,
+                answerSelected: option,
+            }
         default:
             return state;
     }
